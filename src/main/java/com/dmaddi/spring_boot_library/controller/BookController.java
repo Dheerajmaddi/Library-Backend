@@ -1,10 +1,13 @@
 package com.dmaddi.spring_boot_library.controller;
 
 import com.dmaddi.spring_boot_library.entity.Book;
+import com.dmaddi.spring_boot_library.responsemodels.ShelfCurrentLoansResponse;
 import com.dmaddi.spring_boot_library.service.BookService;
 import com.dmaddi.spring_boot_library.utils.ExtractJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -36,5 +39,12 @@ public class BookController {
     public int currentLoansCount(@RequestHeader(value = "Authorization") String token) {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         return bookService.currentLoansCount(userEmail);
+    }
+
+    @GetMapping("/secure/currentloans")
+    public List<ShelfCurrentLoansResponse> currentLoans(@RequestHeader(value = "Authorization") String token)
+            throws Exception{
+        String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
+        return bookService.currentLoans(userEmail);
     }
 }
