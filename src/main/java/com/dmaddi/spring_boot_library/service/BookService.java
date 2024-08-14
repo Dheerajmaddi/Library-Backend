@@ -123,7 +123,7 @@ public class BookService {
             throw  new Exception("Book does not exist or not checked out by user");
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date d1 = simpleDateFormat.parse(validateCheckout.getReturnDate());
         Date d2 = simpleDateFormat.parse(LocalDate.now().toString());
