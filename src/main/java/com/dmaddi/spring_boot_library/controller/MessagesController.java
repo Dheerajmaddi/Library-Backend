@@ -1,6 +1,7 @@
 package com.dmaddi.spring_boot_library.controller;
 
 import com.dmaddi.spring_boot_library.entity.Message;
+import com.dmaddi.spring_boot_library.requestmodels.AdminQuestionRequest;
 import com.dmaddi.spring_boot_library.service.MessagesService;
 import com.dmaddi.spring_boot_library.utils.ExtractJWT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,21 @@ public class MessagesController {
                             @RequestBody Message messageRequest){
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         messagesService.postMessage(messageRequest, userEmail);
+    }
+
+    @PutMapping("/secure/admin/message")
+    public void putMessage(@RequestHeader(value = "Authorization") String token,
+                           @RequestBody AdminQuestionRequest adminQuestionRequest)
+            throws Exception{
+
+        String useEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
+        String admin = ExtractJWT.payloadJWTExtraction(token, "\"userType\"");
+
+        if (admin == null || !admin.equals("admin")){
+            throw new Exception("Administration page only.");
+        }
+
+        messagesService.putMessage(adminQuestionRequest, useEmail);
     }
 
 }
