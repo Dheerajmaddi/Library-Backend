@@ -13,6 +13,6 @@ public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
     List<Checkout> findBooksByUserEmail(String userEmail);
 
     @Modifying
-    @Query(value = "delete from Checkout where book_id in :book_id", nativeQuery = true)
+    @Query(value = "delete from Checkout where bookId in :book_id")
     void deleteAllByBookId(@Param("book_id") Long bookId);
 }
