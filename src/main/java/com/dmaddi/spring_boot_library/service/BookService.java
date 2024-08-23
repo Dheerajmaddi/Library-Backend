@@ -9,8 +9,6 @@ import com.dmaddi.spring_boot_library.entity.Checkout;
 import com.dmaddi.spring_boot_library.entity.History;
 import com.dmaddi.spring_boot_library.entity.Payment;
 import com.dmaddi.spring_boot_library.responsemodels.ShelfCurrentLoansResponse;
-import org.hibernate.annotations.Check;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
